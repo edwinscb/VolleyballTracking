@@ -1,0 +1,138 @@
+:root {
+  --navbar-bg: #358c0d;
+  --navbar-text: #fff;
+  --navbar-accent: #f4b400;
+  --navbar-height: 64px;
+  --navbar-shadow: 0 2px 16px 0 rgba(0,0,0,0.09);
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: var(--navbar-bg);
+  color: var(--navbar-text);
+  height: var(--navbar-height);
+  box-shadow: var(--navbar-shadow);
+  transition: background 0.2s;
+}
+
+.navbar .container,
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--navbar-height);
+  padding: 0 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.navbar-brand img,
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.language-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--navbar-text);
+  user-select: none;
+}
+
+.language-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.navbar-toggler {
+  border: none;
+  background: none;
+  color: var(--navbar-text);
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-link {
+  color: var(--navbar-text);
+  font-size: 1.06rem;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.navbar-link.active,
+.navbar-link:focus,
+.navbar-link:hover {
+  color: var(--navbar-accent);
+  background: none;
+  font-size: 1.15rem;
+  font-weight: bold;
+}
+
+.navbar-github-link img {
+  vertical-align: middle;
+  margin-right: 6px;
+  width: 22px;
+  height: 22px;
+  display: inline;
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    height: auto;
+    padding: 0;
+  }
+  .navbar .container,
+  .nav-container {
+    flex-direction: row;
+    padding: 0 1rem;
+    height: 56px;
+  }
+  .navbar-collapse {
+    background: var(--navbar-bg);
+    box-shadow: var(--navbar-shadow);
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    z-index: 999;
+  }
+  .navbar-link {
+    padding: 0.7rem 1.5rem;
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar .container,
+  .nav-container {
+    padding: 0 0.5rem;
+    height: 50px;
+  }
+  .navbar-brand img,
+  .logo-img {
+    height: 32px;
+  }
+  .language-icon img {
+    width: 20px;
+    height: 20px;
+  }
+  .navbar-link {
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+  }
+}
