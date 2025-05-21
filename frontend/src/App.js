@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer";
 import { Banner } from "./components/Banner";
 import { UploadForm } from "./components/UploadForm";
 import { Roadmap } from "./components/Roadmap";
+import { MetricsDescription } from "./components/MetricsDescription";
 function App() {
   return (
     <LanguageProvider>
@@ -15,6 +16,7 @@ function App() {
         <Banner/>
         <UploadForm/>
         <Roadmap/>
+        <MetricsDescription/>
         <Footer/>
       </Router>
     </LanguageProvider>
