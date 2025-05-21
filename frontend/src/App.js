@@ -6,6 +6,7 @@ import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Banner } from "./components/Banner";
 import { UploadForm } from "./components/UploadForm";
+import { Roadmap } from "./components/Roadmap";
 function App() {
   return (
     <LanguageProvider>
@@ -13,6 +14,7 @@ function App() {
         <NavBar/>
         <Banner/>
         <UploadForm/>
+        <Roadmap/>
         <Footer/>
       </Router>
     </LanguageProvider>
