@@ -4,11 +4,14 @@ frontend/.env
 
 # Python (backend)
 backend/__pycache__/
-backend/env/
-backend/.env
+backend/venv/
+backend/.venv
 *.pyc
 *.pyo
 
+yolo/__pycache__/
+yolo/venv/
+yolo/.venv
 # General
 .DS_Store
 *.log
