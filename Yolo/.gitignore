@@ -14,11 +14,7 @@ modelos/
 *.onnx
 
 # Archivos multimedia grandes (opcional)
-*.mp4
-*.avi
-*.jpg
-*.jpeg
-*.png
+
 
 # Archivos temporales o de sistema
 .DS_Store
