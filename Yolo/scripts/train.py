@@ -2,7 +2,7 @@ from ultralytics import YOLO
 
 def main():
     data_yaml = '../Yolo/datasets/data.yaml'
-    model = YOLO('models/yolo12n.pt')
+    model = YOLO('models/yolo12s.pt')
 
     results = model.train(
         data=data_yaml,
@@ -14,7 +14,7 @@ def main():
         patience=30,
         device=0,
         project='runs/train',
-        name='Volleyballyolo12n960imgsz',
+        name='Volleyballyolo12s960imgsz',
         exist_ok=True
     )
 

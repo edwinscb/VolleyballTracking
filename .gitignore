@@ -1,17 +1,20 @@
 # Node (React)
 frontend/node_modules
-frontend/.env
+
 
 # Python (backend)
 backend/__pycache__/
-backend/venv/
-backend/.venv
 *.pyc
 *.pyo
 
 yolo/__pycache__/
-yolo/venv/
-yolo/.venv
+
 # General
 .DS_Store
 *.log
+
+# Entorno virtual de Python
+venv/
+.env/
+.env.bak/
+env/
