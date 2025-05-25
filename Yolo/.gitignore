@@ -8,9 +8,6 @@ env/
 
 # Datasets y resultados de entrenamiento
 datasets/
-runs/
-modelos/
-*.pt
 *.onnx
 
 # Archivos multimedia grandes (opcional)
