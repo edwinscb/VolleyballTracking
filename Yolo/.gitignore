@@ -6,9 +6,6 @@ __pycache__/
 env/
 .venv/
 
-# Datasets y resultados de entrenamiento
-datasets/
-*.onnx
 
 # Archivos multimedia grandes (opcional)
 
