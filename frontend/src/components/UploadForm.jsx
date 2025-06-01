@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "../styles/UploadForm.css";
+
+const API_URL = "https://insects-months-felt-section.trycloudflare.com";
+
 const LANGUAGES = {
   EN: 'en',
   ES: 'es'
@@ -14,7 +17,9 @@ const TRANSLATIONS = {
     upload: "Process Video",
     processing: "Processing video...",
     success: "Processing complete!",
-    error: "An error occurred. Try again."
+    error: "An error occurred. Try again.",
+    download: "Download Video",
+    watch: "Watch processed video"
   },
   [LANGUAGES.ES]: {
     title: "Procesa tu video de Voleibol",
@@ -23,7 +28,9 @@ const TRANSLATIONS = {
     upload: "Procesar video",
     processing: "Procesando video...",
     success: "¡Procesamiento completo!",
-    error: "Ocurrió un error. Intenta de nuevo."
+    error: "Ocurrió un error. Intenta de nuevo.",
+    download: "Descargar Video",
+    watch: "Ver video procesado"
   }
 };
 
@@ -32,11 +39,13 @@ export const UploadForm = ({ onUploadSuccess }) => {
   const [file, setFile] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState("");
+  const [videoId, setVideoId] = useState(null);
   const fileInput = useRef(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setResult("");
+    setVideoId(null); 
   };
 
   const handleSubmit = async (e) => {
@@ -45,13 +54,13 @@ export const UploadForm = ({ onUploadSuccess }) => {
 
     setProcessing(true);
     setResult("");
+    setVideoId(null);
+
     try {
-      // Ejemplo de envío al backend
       const formData = new FormData();
       formData.append("file", file);
 
-      // Cambia la URL por la de tu backend Python
-      const response = await fetch("https://tu-backend-api.com/predict", {
+      const response = await fetch(`${API_URL}/video/upload`, {
         method: "POST",
         body: formData,
       });
@@ -61,7 +70,8 @@ export const UploadForm = ({ onUploadSuccess }) => {
 
       setProcessing(false);
       setResult("success");
-      if (onUploadSuccess) onUploadSuccess(data);
+      setVideoId(data.video_id);
+      if (onUploadSuccess) onUploadSuccess({ ...data, videoId: data.video_id });
     } catch (err) {
       setProcessing(false);
       setResult("error");
@@ -71,6 +81,7 @@ export const UploadForm = ({ onUploadSuccess }) => {
   return (
     <section className="upload-section" id="demo">
       <h2>{TRANSLATIONS[currentLang].title}</h2>
+
       <form className="upload-form" onSubmit={handleSubmit}>
         <input
           type="file"
@@ -79,6 +90,7 @@ export const UploadForm = ({ onUploadSuccess }) => {
           ref={fileInput}
           onChange={handleFileChange}
         />
+
         <button
           type="button"
           className="upload-select-btn"
@@ -86,9 +98,11 @@ export const UploadForm = ({ onUploadSuccess }) => {
         >
           {TRANSLATIONS[currentLang].select}
         </button>
+
         <span className="upload-file-label">
           {file ? file.name : TRANSLATIONS[currentLang].noFile}
         </span>
+
         <button
           type="submit"
           className="upload-submit-btn"
@@ -99,11 +113,46 @@ export const UploadForm = ({ onUploadSuccess }) => {
             : TRANSLATIONS[currentLang].upload}
         </button>
       </form>
+
+      {/* SPINNER DE PROCESAMIENTO */}
+      {processing && (
+        <div className="spinner-container">
+          <div className="spinner"></div>
+        </div>
+      )}
+
+      {/* MENSAJE DE RESULTADO */}
       {result === "success" && (
         <div className="upload-success">{TRANSLATIONS[currentLang].success}</div>
       )}
       {result === "error" && (
         <div className="upload-error">{TRANSLATIONS[currentLang].error}</div>
+      )}
+
+      {/* VIDEO Y BOTÓN DE DESCARGA */}
+      {videoId && (
+        <div className="upload-video-result">
+          <h3>{TRANSLATIONS[currentLang].watch}</h3>
+
+          <video
+            key={videoId}
+            width="100%"
+            height="auto"
+            controls
+            src={`${API_URL}/video/show/${videoId}`}
+          >
+            Tu navegador no soporta la reproducción de video.
+          </video>
+
+          <div className="download-button">
+            <a
+              href={`${API_URL}/video/download/${videoId}`}
+              download={`volleyball_processed_${videoId}.mp4`}
+            >
+              {TRANSLATIONS[currentLang].download}
+            </a>
+          </div>
+        </div>
       )}
     </section>
   );
