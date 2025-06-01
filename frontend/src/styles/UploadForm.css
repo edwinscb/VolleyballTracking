@@ -1,5 +1,5 @@
 .upload-section {
-  max-width: 540px;
+  max-width: 90%;
   margin: 3rem auto 0 auto;
   background: #171a2e;
   border-radius: 18px;
@@ -120,7 +120,16 @@
 .download-button a:hover {
   background-color: #2980b9;
 }
-
+@media (max-width: 900px) {
+  .backend-status {
+    position: static !important;
+    margin: 1rem auto !important;
+    justify-content: center !important;
+    text-align: center;
+    left: auto !important;
+  } 
+  
+}
 @media (max-width: 700px) {
   .upload-section {
     max-width: 98vw;
@@ -133,5 +142,67 @@
   .upload-submit-btn {
     padding: 0.52rem 1.2rem;
     font-size: 1rem;
-  }
+  } 
+  
+}
+
+.backend-status {
+  position: absolute;
+  
+  left:7%;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.status-online {
+  background: #16df7e;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  font-size: 0.96rem;
+  padding: 0.5rem 1.4rem;
+  border-radius: 20px;
+  align-items: center;
+  gap: 0.5rem;
+
+}
+
+.status-offline {
+  flex-direction: column;
+  background: #ff0000;
+  color: #000000;
+  font-weight: 600;
+  display: flex;
+  font-size: 0.96rem;
+  padding: 0.5rem 1.4rem;
+  border-radius: 20px;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wake-button {
+  color: #16192d;
+  font-weight: 600;
+  font-size: 0.96rem;
+  padding: 0.5rem 1.4rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  border: none;
+}
+
+.wake-button:hover,
+.wake-button:focus {
+  background: #fff;
+  color: #232441;
+}
+
+.wake-button:disabled {
+  background: #ffefc2;
+  color: #aaaaaa;
+  cursor: not-allowed;
 }

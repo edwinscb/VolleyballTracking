@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from fastapi.responses import FileResponse
 
+import asyncio
 from app.services.yolo_service import YOLOService
 import cv2
 import os
@@ -34,6 +35,16 @@ def get_video_duration(video_path):
     frame_count = cap.get(cv2.CAP_PROP_FRAME_COUNT)
     cap.release()
     return frame_count / fps if fps > 0 else -1
+
+
+@router.post("/wake")
+async def wake_backend():
+    print("Solicitud de encendido recibida")
+    return JSONResponse(content={"message": "Backend waking up"}, status_code=200)
+
+@router.get("/status")
+async def status_check():
+    return {"status": "online"}
 
 @router.post("/upload/")
 async def upload_video(file: UploadFile = File(...)):
