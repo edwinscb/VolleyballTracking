@@ -55,8 +55,6 @@ export const UploadForm = ({ onUploadSuccess,apiUrl  }) => {
   const [videoId, setVideoId] = useState(null);
   const fileInput = useRef(null);
   const [backendOnline, setBackendOnline] = useState(null);
-  const [waking, setWaking] = useState(false);
-  const [wakeRequested, setWakeRequested] = useState(false);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -89,21 +87,6 @@ export const UploadForm = ({ onUploadSuccess,apiUrl  }) => {
     };
 
     videoElement.src = URL.createObjectURL(selectedFile);
-  };
-
-
-  const requestWakeUp = async () => {
-    setWaking(true);
-    try {
-      const res = await fetch(`${apiUrl}/wake`, { method: "POST" });
-      if (res.ok) {
-        setWakeRequested(true);
-      }
-    } catch (err) {
-      console.error("Wake-up request failed");
-    } finally {
-      setWaking(false);
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -161,18 +144,15 @@ export const UploadForm = ({ onUploadSuccess,apiUrl  }) => {
         ) : (
           <div className="status-offline">
             <span>{TRANSLATIONS[currentLang].statusOffline}</span>
-            <button
-              className="wake-button"
-              onClick={requestWakeUp}
-              disabled={waking}
-            >
-              {waking
-                ? TRANSLATIONS[currentLang].wakingUp
-                : TRANSLATIONS[currentLang].wakeRequest}
-            </button>
-            {wakeRequested && (
-              <span className="wake-sent">{TRANSLATIONS[currentLang].wakeSent}</span>
-            )}
+              <a
+  className="wake-button"
+  href="https://wa.me/573132952297?text=Hola,%20por%20favor%20enciende%20el%20servidor"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  {TRANSLATIONS[currentLang].wakeRequest}
+</a>
+
           </div>
         )}
       </div>
