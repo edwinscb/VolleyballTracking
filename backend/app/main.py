@@ -26,17 +26,25 @@ STATIC_DIR.mkdir(parents=True, exist_ok=True)
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 RESULT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Limpiar al inicio
+# Función para limpiar directorios
 def clear_directory(directory: Path):
     for file in directory.iterdir():
         if file.is_file():
             file.unlink()
     print(f"Archivos eliminados de {directory}")
 
+# Limpiar al iniciar
 clear_directory(UPLOAD_DIR)
 clear_directory(RESULT_DIR)
 
-# Rutas
+# Limpiar al apagar
+@app.on_event("shutdown")
+def on_shutdown():
+    clear_directory(UPLOAD_DIR)
+    clear_directory(RESULT_DIR)
+    print("Apagando backend: archivos eliminados")
+
+# Registrar rutas
 app.include_router(video.router, prefix="/video", tags=["video"])
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
