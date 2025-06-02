@@ -12,7 +12,7 @@ from typing import List
 
 router = APIRouter()
 yolo_service = YOLOService(model_path="app/models/Volleyballyolo12n960imgsz.pt")
-BASE_DIR = Path(__file__).resolve().parent.parent  # apunta a la raíz de tu app
+BASE_DIR = Path(__file__).resolve().parent.parent  
 UPLOAD_DIR = BASE_DIR / "static" / "uploads"
 RESULT_DIR = BASE_DIR / "static" / "results"
 
