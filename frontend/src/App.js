@@ -9,7 +9,7 @@ import { UploadForm } from "./components/UploadForm";
 import { MetricsDescription } from "./components/MetricsDescription";
 import { ModelMetrics } from "./components/ModelMetrics";
 import { Demo } from "./components/Demo";
-
+import { Analytics } from "@vercel/analytics/react"
 const API_URL = process.env.REACT_APP_API_URL+"/video";
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <ModelMetrics/>
         <MetricsDescription/>
         <Footer/>
+        <Analytics />
       </Router>
     </LanguageProvider>
   );
