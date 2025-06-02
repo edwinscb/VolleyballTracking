@@ -19,7 +19,7 @@ const TRANSLATIONS = {
   [LANGUAGES.EN]: {
     home: "Home",
     demo: "Demo",
-    how: "How it works",
+    portafolio: "my Portfolio",
     metrics: "Metrics",
     repo: "Repository",
     language: "Language"
@@ -27,14 +27,14 @@ const TRANSLATIONS = {
   [LANGUAGES.ES]: {
     home: "Inicio",
     demo: "Demostración",
-    how: "Funcionamiento",
+    portafolio: "mi portafolio",
     metrics: "Métricas",
     repo: "Repositorio",
     language: "Idioma"
   }
 };
 
-const NAV_ITEMS = ["home", "demo", "how", "metrics"];
+const NAV_ITEMS = ["home", "demo",  "metrics","portafolio"];
 
 const LanguageSelector = ({ currentLang, toggleLanguage }) => (
   <div
@@ -101,20 +101,33 @@ export const NavBar = () => {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            {NAV_ITEMS.map((item) => (
-              <Nav.Link
-                key={item}
-                as={HashLink}
-                to={`#${item}`}
-                className={classNames("navbar-link", {
-                  active: activeLink === item
-                })}
-                onClick={() => handleNavLinkClick(item)}
-                aria-current={activeLink === item ? "page" : undefined}
-              >
-                {TRANSLATIONS[currentLang][item]}
-              </Nav.Link>
-            ))}
+            {NAV_ITEMS.map((item) =>
+              item === "portafolio" ? (
+                <Nav.Link
+                  key={item}
+                  href="https://portafolioedwincastro.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="navbar-link"
+                >
+                  {TRANSLATIONS[currentLang][item]}
+                </Nav.Link>
+              ) : (
+                <Nav.Link
+                  key={item}
+                  as={HashLink}
+                  to={`#${item}`}
+                  className={classNames("navbar-link", {
+                    active: activeLink === item
+                  })}
+                  onClick={() => handleNavLinkClick(item)}
+                  aria-current={activeLink === item ? "page" : undefined}
+                >
+                  {TRANSLATIONS[currentLang][item]}
+                </Nav.Link>
+              )
+            )}
+
 
             <Nav.Link
               href="https://github.com/edwinscb/VolleyballTracking"

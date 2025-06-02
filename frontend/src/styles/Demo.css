@@ -1,0 +1,43 @@
+.demo-section {
+  padding: 2rem 1rem;
+  background: rgba(36, 27, 70, 0.75);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(44, 15, 96, 0.18);
+  margin-bottom: 2rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-top: 2rem;
+  margin-right: auto;
+}
+
+.demo-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #a784ff;
+  letter-spacing: 1px;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+
+.demo-video-wrapper {
+  background: rgba(170, 54, 124, 0.08);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  transition: background 0.3s;
+}
+
+.demo-video-wrapper:hover {
+  background: rgba(100, 54, 170, 0.22);
+}
+
+.demo-video {
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(168, 132, 255, 0.2);
+}

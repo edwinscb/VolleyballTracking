@@ -1,0 +1,134 @@
+.model-metrics-section {
+  padding: 2rem 1rem;
+  background: rgba(36, 27, 70, 0.75);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(44, 15, 96, 0.18);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.model-metrics-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: #a784ff;
+  letter-spacing: 1px;
+}
+
+.model-metrics-list {
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.model-metrics-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+  background: rgba(120, 90, 200, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+  transition: background 0.3s;
+  flex-wrap: wrap;
+}
+
+.model-metrics-item:hover {
+  background: rgba(100, 80, 180, 0.22);
+}
+
+.model-metrics-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.model-metrics-label {
+  color: #5930b2;
+  font-size: 1.1rem;
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.model-metrics-value {
+  color: #cecdf1;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+  word-break: break-word;
+}
+
+.metrics-icon {
+  font-size: 2.3rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(168, 132, 255, 0.3));
+}
+.model-metrics-select-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.model-metrics-select {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid #a784ff;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #bcb2e7;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.model-metrics-select:hover,
+.model-metrics-select:focus {
+  border-color: #cba6f7;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.model-metrics-label {
+  color: #cba6f7;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .model-metrics-title {
+    font-size: 1.5rem;
+  }
+
+  .model-metrics-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.8rem;
+  }
+
+  .metrics-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .model-metrics-label {
+    font-size: 1rem;
+  }
+
+  .model-metrics-value {
+    font-size: 1rem;
+  }
+}

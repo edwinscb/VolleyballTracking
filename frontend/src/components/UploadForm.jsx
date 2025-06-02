@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import "../styles/UploadForm.css";
 
-const API_URL = "https://closer-cocktail-big-stated.trycloudflare.com/video";
 
 const LANGUAGES = {
   EN: 'en',
@@ -47,7 +46,8 @@ const TRANSLATIONS = {
   }
 };
 
-export const UploadForm = ({ onUploadSuccess }) => {
+export const UploadForm = ({ onUploadSuccess,apiUrl  }) => {
+  const [validationError, setValidationError] = useState("");
   const { currentLang } = useLanguage();
   const [file, setFile] = useState(null);
   const [processing, setProcessing] = useState(false);
@@ -59,15 +59,43 @@ export const UploadForm = ({ onUploadSuccess }) => {
   const [wakeRequested, setWakeRequested] = useState(false);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
     setResult("");
-    setVideoId(null); 
+    setVideoId(null);
+    setValidationError("");
+
+    if (!selectedFile) {
+      setFile(null);
+      return;
+    }
+
+    const videoElement = document.createElement("video");
+    videoElement.preload = "metadata";
+
+    videoElement.onloadedmetadata = () => {
+      window.URL.revokeObjectURL(videoElement.src);
+      const duration = videoElement.duration;
+      if (duration > 60) {
+        setValidationError("El video no puede durar más de 60 segundos.");
+        setFile(null);
+      } else {
+        setFile(selectedFile);
+      }
+    };
+
+    videoElement.onerror = () => {
+      setValidationError("Archivo no válido.");
+      setFile(null);
+    };
+
+    videoElement.src = URL.createObjectURL(selectedFile);
   };
+
 
   const requestWakeUp = async () => {
     setWaking(true);
     try {
-      const res = await fetch(`${API_URL}/wake`, { method: "POST" });
+      const res = await fetch(`${apiUrl}/wake`, { method: "POST" });
       if (res.ok) {
         setWakeRequested(true);
       }
@@ -90,7 +118,7 @@ export const UploadForm = ({ onUploadSuccess }) => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch(`${API_URL}/upload`, {
+      const response = await fetch(`${apiUrl}/upload`, {
         method: "POST",
         body: formData,
       });
@@ -110,7 +138,7 @@ export const UploadForm = ({ onUploadSuccess }) => {
   useEffect(() => {
     const checkStatus = async () => {
       try {
-        const res = await fetch(`${API_URL}/status`);
+        const res = await fetch(`${apiUrl}/status`);
         if (res.ok) {
           setBackendOnline(true);
         } else {
@@ -122,7 +150,7 @@ export const UploadForm = ({ onUploadSuccess }) => {
     };
 
     checkStatus();
-  }, []);
+  }, [apiUrl]);
   return (
     <section className="upload-section" id="demo">
       <div className="backend-status">
@@ -169,6 +197,9 @@ export const UploadForm = ({ onUploadSuccess }) => {
         <span className="upload-file-label">
           {file ? file.name : TRANSLATIONS[currentLang].noFile}
         </span>
+        {validationError && (
+          <div className="upload-error">{validationError}</div>
+        )}
 
         <button
           type="submit"
@@ -206,14 +237,14 @@ export const UploadForm = ({ onUploadSuccess }) => {
             width="100%"
             height="auto"
             controls
-            src={`${API_URL}/show/${videoId}`}
+            src={`${apiUrl}/show/${videoId}`}
           >
             Tu navegador no soporta la reproducción de video.
           </video>
 
           <div className="download-button">
             <a
-              href={`${API_URL}/download/${videoId}`}
+              href={`${apiUrl}/download/${videoId}`}
               download={`volleyball_processed_${videoId}.mp4`}
             >
               {TRANSLATIONS[currentLang].download}
