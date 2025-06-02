@@ -4,7 +4,7 @@ const LanguageContext = createContext();
 
 // Proveedor del contexto
 export const LanguageProvider = ({ children }) => {
-  const [currentLang, setCurrentLang] = useState("en");
+  const [currentLang, setCurrentLang] = useState("es");
   const toggleLanguage = () => setCurrentLang((lang) => (lang === "es" ? "en" : "es"));
 
   return (
