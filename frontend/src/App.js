@@ -10,7 +10,7 @@ import { MetricsDescription } from "./components/MetricsDescription";
 import { ModelMetrics } from "./components/ModelMetrics";
 import { Demo } from "./components/Demo";
 
-const API_URL = "http://127.0.0.1:8000"+"/video";
+const API_URL = process.env.REACT_APP_API_URL+"/video";
 
 function App() {
   
